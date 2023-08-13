@@ -1,7 +1,13 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Input } from '@/components/atom';
+import { useAuthForm } from '@/hooks';
+
+export type FormType = 'signin' | 'signup';
+
+type Props = {
+  type: FormType;
+};
 
 const Form = styled.section`
   display: flex;
@@ -9,10 +15,6 @@ const Form = styled.section`
   gap: 24px;
   width: 512px;
 `;
-
-type Props = {
-  type: 'signin' | 'signup';
-};
 
 const FORM_DETAILS = {
   signin: {
@@ -26,26 +28,32 @@ const FORM_DETAILS = {
 };
 
 const AuthForm = ({ type }: Props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, onInputChange, isValidForm, onSubmit] = useAuthForm(type);
 
   return (
     <Form>
       <Input
         data-testid="email-input"
         type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        name="email"
+        value={form.email}
+        onChange={onInputChange}
         placeholder="이메일을 입력하세요."
       />
       <Input
         data-testid="password-input"
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        name="password"
+        value={form.password}
+        onChange={onInputChange}
         placeholder="비밀번호를 입력하세요."
       />
-      <Button data-testid={FORM_DETAILS[type].BUTTON_ID} type="submit" disabled>
+      <Button
+        data-testid={FORM_DETAILS[type].BUTTON_ID}
+        type="submit"
+        disabled={!isValidForm}
+        onClick={onSubmit}
+      >
         {FORM_DETAILS[type].BUTTON_LABEL}
       </Button>
     </Form>
