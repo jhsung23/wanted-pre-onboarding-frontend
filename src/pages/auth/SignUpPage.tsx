@@ -1,5 +1,13 @@
+import { Heading } from '@/components/atom';
+import AuthForm from '@/components/domain/auth/AuthForm';
+
 const SignUpPage = () => {
-  return <div>SignUpPage</div>;
+  return (
+    <>
+      <Heading>Sign Up</Heading>
+      <AuthForm type="signup" />
+    </>
+  );
 };
 
 export default SignUpPage;
