@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef, Ref } from 'react';
+import { ComponentPropsWithRef, Ref, forwardRef } from 'react';
 import styled from 'styled-components';
 
 const H1 = styled.h1`
@@ -9,11 +9,14 @@ const H1 = styled.h1`
 
 interface Props extends ComponentPropsWithRef<'h1'> {
   children: React.ReactNode;
-  ref: Ref<HTMLHeadingElement>;
 }
 
-const Heading = ({ children, ...rest }: Props) => {
-  return <H1 {...rest}>{children}</H1>;
+const Heading = ({ children, ...rest }: Props, ref: Ref<HTMLHeadingElement>) => {
+  return (
+    <H1 ref={ref} {...rest}>
+      {children}
+    </H1>
+  );
 };
 
 export default forwardRef(Heading);

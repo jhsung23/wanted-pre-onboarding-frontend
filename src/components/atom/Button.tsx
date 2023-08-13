@@ -29,10 +29,9 @@ const StyledButton = styled.button`
 
 interface Props extends ComponentPropsWithRef<'button'> {
   children: React.ReactNode;
-  ref: Ref<HTMLButtonElement>;
 }
 
-const Button = ({ children, ref, ...rest }: Props) => {
+const Button = ({ children, ...rest }: Props, ref: Ref<HTMLButtonElement>) => {
   return (
     <StyledButton ref={ref} {...rest}>
       {children}

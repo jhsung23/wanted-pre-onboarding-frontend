@@ -12,11 +12,9 @@ const StyledInput = styled.input`
   }
 `;
 
-interface Props extends ComponentPropsWithRef<'input'> {
-  ref: Ref<HTMLInputElement>;
-}
+interface Props extends ComponentPropsWithRef<'input'> {}
 
-const Input = ({ ref, ...rest }: Props) => {
+const Input = ({ ...rest }: Props, ref: Ref<HTMLInputElement>) => {
   return <StyledInput ref={ref} {...rest} />;
 };
 
