@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/apis';
-import { Todo } from './types';
+import { Todo, TodoPostRequest } from './types';
 
 export const getTodos = () => {
   return axiosInstance().get<Todo>('/todos', {
@@ -9,8 +9,13 @@ export const getTodos = () => {
   });
 };
 
-export const createTodo = () => {
-  return axiosInstance().post('');
+export const createTodo = (todo: TodoPostRequest) => {
+  return axiosInstance().post('/todos', todo, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'Content-Type': 'application/json',
+    },
+  });
 };
 
 export const updateTodo = () => {
