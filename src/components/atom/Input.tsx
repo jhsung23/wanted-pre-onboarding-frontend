@@ -2,7 +2,7 @@ import { ComponentPropsWithRef, Ref, forwardRef } from 'react';
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid #bbb;
   padding: 10px 16px;
   font-size: medium;
