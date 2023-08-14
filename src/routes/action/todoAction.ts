@@ -13,5 +13,7 @@ export const todoUpdateAction: ActionFunction = async ({ request }) => {
 };
 
 export const todoDeleteAction: ActionFunction = async ({ request }) => {
-  return deleteTodo();
+  const formData = await request.formData();
+  const idToDelete = Number(formData.get('id'));
+  return deleteTodo({ id: idToDelete });
 };

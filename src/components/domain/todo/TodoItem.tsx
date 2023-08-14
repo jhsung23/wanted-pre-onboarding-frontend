@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useFetcher } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Todo } from '@/apis/todo/types';
@@ -16,8 +17,13 @@ const ListItem = styled.li`
 `;
 
 const TodoItem = ({ item }: Props) => {
-  const { id, todo, isCompleted, userId } = item;
+  const { id, todo, isCompleted } = item;
   const [isDone, setIsDone] = useState(isCompleted);
+  const fetcher = useFetcher();
+
+  const deleteTodo = () => {
+    fetcher.submit({ id }, { method: 'delete', action: '/todo/delete' });
+  };
 
   return (
     <ListItem key={id}>
@@ -28,7 +34,7 @@ const TodoItem = ({ item }: Props) => {
       <Button data-testid="modify-button" color="secondary" size="small">
         수정
       </Button>
-      <Button data-testid="delete-button" color="secondary" size="small">
+      <Button data-testid="delete-button" color="secondary" size="small" onClick={deleteTodo}>
         삭제
       </Button>
     </ListItem>

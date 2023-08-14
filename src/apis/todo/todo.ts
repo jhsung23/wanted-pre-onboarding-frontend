@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/apis';
-import { Todo, TodoPostRequest } from './types';
+import { Todo, TodoDeleteRequest, TodoPostRequest } from './types';
 
 export const getTodos = () => {
   return axiosInstance().get<Todo>('/todos', {
@@ -22,6 +22,10 @@ export const updateTodo = () => {
   return axiosInstance().put('');
 };
 
-export const deleteTodo = () => {
-  return axiosInstance().delete('');
+export const deleteTodo = (todoToDelete: TodoDeleteRequest) => {
+  return axiosInstance().delete(`/todos/${todoToDelete.id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    },
+  });
 };

@@ -8,3 +8,7 @@ export type Todo = {
 export type TodoPostRequest = {
   todo: string;
 };
+
+export type TodoDeleteRequest = {
+  id: number;
+};
