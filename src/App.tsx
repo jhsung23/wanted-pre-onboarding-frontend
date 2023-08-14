@@ -5,7 +5,8 @@ import './App.css';
 
 const Main = styled.main`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
