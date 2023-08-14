@@ -4,7 +4,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import './index.css';
 
+import { ProtectedRoute } from '@/components/helper';
 import { SignInPage, SignUpPage } from '@/pages/auth';
+import TodoPage from '@/pages/todo/TodoPage';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
     children: [
       { path: 'signin', element: <SignInPage /> },
       { path: 'signup', element: <SignUpPage /> },
+      {
+        path: 'todo',
+        element: (
+          <ProtectedRoute>
+            <TodoPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
