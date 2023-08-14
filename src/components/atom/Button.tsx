@@ -1,14 +1,72 @@
 import { ComponentPropsWithRef, Ref, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
-const StyledButton = styled.button`
-  border-radius: 12px;
-  border: 0 solid #bbb;
+interface CustomProps {
+  size?: 'small' | 'default' | 'large';
+  color?: 'primary' | 'secondary';
+}
+
+interface Props extends Omit<ComponentPropsWithRef<'button'>, 'color'>, CustomProps {
+  children: React.ReactNode;
+}
+
+const StyledButton = styled.button<CustomProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  border: 0;
   padding: 10px 16px;
-  background-color: rgb(44, 91, 242);
-  color: white;
   font-weight: 700;
-  font-size: medium;
+
+  & + & {
+    margin-left: 0.3rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${({ size }) => {
+    if (size === 'small') {
+      return css`
+        font-size: small;
+      `;
+    }
+    if (size === 'default') {
+      return css`
+        font-size: medium;
+      `;
+    }
+    if (size === 'large') {
+      return css`
+        font-size: large;
+      `;
+    }
+  }}
+
+  ${({ color }) => {
+    if (color === 'primary') {
+      return css`
+        background-color: rgb(44, 91, 242);
+        color: white;
+
+        &:hover {
+          background-color: rgb(67, 139, 255);
+        }
+      `;
+    }
+    if (color === 'secondary') {
+      return css`
+        background-color: #f2f4f7;
+        color: #a4a4a5;
+
+        &:hover {
+          background-color: #e8e9ea;
+        }
+      `;
+    }
+  }}
 
   ${({ disabled }) => {
     if (disabled) {
@@ -16,24 +74,23 @@ const StyledButton = styled.button`
         background-color: #f2f4f7;
         color: #cccccc;
         cursor: not-allowed;
+
+        &:hover {
+          background-color: #f2f4f7;
+          color: #cccccc;
+          cursor: not-allowed;
+        }
       `;
     }
-    return css`
-      &:hover {
-        background-color: rgb(67, 139, 255);
-        cursor: pointer;
-      }
-    `;
   }}
 `;
 
-interface Props extends ComponentPropsWithRef<'button'> {
-  children: React.ReactNode;
-}
-
-const Button = ({ children, ...rest }: Props, ref: Ref<HTMLButtonElement>) => {
+const Button = (
+  { size = 'default', color = 'primary', children, ...rest }: Props,
+  ref: Ref<HTMLButtonElement>
+) => {
   return (
-    <StyledButton ref={ref} {...rest}>
+    <StyledButton size={size} color={color} ref={ref} {...rest}>
       {children}
     </StyledButton>
   );
