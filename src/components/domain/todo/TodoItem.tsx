@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import { useState } from 'react';
 import { useFetcher } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Todo } from '@/apis/todo/types';
 import { Button, Checkbox, Label } from '@/components/atom';
@@ -11,12 +10,29 @@ interface Props {
   item: Todo;
 }
 
-const ListItem = styled.li`
+const ListItem = styled.li<{ isEditing: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 38px;
   font-size: medium;
+
+  & span {
+    width: 220px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  ${({ isEditing }) => {
+    if (isEditing) {
+      return css`
+        & span {
+          display: none;
+        }
+      `;
+    }
+  }}
 `;
 
 const TodoItem = ({ item }: Props) => {
@@ -39,7 +55,7 @@ const TodoItem = ({ item }: Props) => {
   };
 
   return (
-    <ListItem key={id}>
+    <ListItem key={id} isEditing={isEditing}>
       <Label>
         <Checkbox
           name="isCompleted"
@@ -49,7 +65,7 @@ const TodoItem = ({ item }: Props) => {
             updateTodo();
           }}
         />
-        <span className={classNames({ hidden: isEditing })}>{todo}</span>
+        <span>{todo}</span>
       </Label>
       {isEditing ? (
         <EditableTodoItem
