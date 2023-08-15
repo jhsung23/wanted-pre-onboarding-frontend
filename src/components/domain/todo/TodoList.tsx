@@ -1,6 +1,7 @@
-import { Todo } from '@/apis/todo/types';
 import styled from 'styled-components';
-import TodoItem from './TodoItem';
+
+import { Todo } from '@/apis/todo/types';
+import { TodoItem } from '@/components/domain/todo';
 
 type Props = {
   datas: Todo[];
@@ -14,12 +15,22 @@ const List = styled.ul`
   padding: 1rem 0;
 `;
 
+const Empty = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bbb;
+  margin-top: 1rem;
+`;
+
 const TodoList = ({ datas }: Props) => {
   return (
     <List>
-      {datas.map((data) => (
-        <TodoItem key={data.id} item={data} />
-      ))}
+      {datas.length ? (
+        datas.map((data) => <TodoItem key={data.id} item={data} />)
+      ) : (
+        <Empty>등록된 Todo가 없습니다.</Empty>
+      )}
     </List>
   );
 };
