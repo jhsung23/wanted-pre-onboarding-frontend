@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const StyledInput = styled.input`
   border-radius: 6px;
   border: 1px solid #bbb;
-  padding: 10px 16px;
+  padding: 10px 12px;
+  height: 15px;
   font-size: medium;
 
   &::placeholder {
