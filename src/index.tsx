@@ -1,23 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
 import './index.css';
+import { router } from './routes';
 
-import { SignInPage, SignUpPage } from '@/pages/auth';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      { path: 'signin', element: <SignInPage /> },
-      { path: 'signup', element: <SignUpPage /> },
-    ],
-  },
-]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
