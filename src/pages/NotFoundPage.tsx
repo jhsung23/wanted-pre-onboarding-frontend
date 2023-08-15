@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+import { Navigate, useRouteError } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -10,6 +12,8 @@ const Container = styled.div`
 `;
 
 const NotFoundPage = () => {
+  const error = useRouteError() as AxiosError;
+  if (error.response?.status === 401) return <Navigate to={'/signin'} />;
   return <Container>Page Not Found!</Container>;
 };
 
