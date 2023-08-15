@@ -1,50 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
 import './index.css';
+import { router } from './routes';
 
-import { getTodos } from '@/apis/todo/todo';
-import { ProtectedRoute } from '@/components/helper';
-import { SignInPage, SignUpPage } from '@/pages/auth';
-import TodoPage from '@/pages/todo/TodoPage';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { todoCreateAction, todoDeleteAction, todoUpdateAction } from './routes/action/todoAction';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      { path: 'signin', element: <SignInPage /> },
-      { path: 'signup', element: <SignUpPage /> },
-      {
-        path: 'todo',
-        loader: getTodos,
-        element: (
-          <ProtectedRoute>
-            <TodoPage />
-          </ProtectedRoute>
-        ),
-        children: [
-          {
-            path: 'create',
-            action: todoCreateAction,
-          },
-          {
-            path: 'delete',
-            action: todoDeleteAction,
-          },
-          {
-            path: 'update',
-            action: todoUpdateAction,
-          },
-        ],
-      },
-    ],
-  },
-]);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
