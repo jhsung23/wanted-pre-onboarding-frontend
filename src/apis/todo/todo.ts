@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/apis';
-import { Todo, TodoDeleteRequest, TodoPostRequest } from './types';
+import { Todo, TodoDeleteRequest, TodoPostRequest, TodoUpdateRequest } from './types';
 
 export const getTodos = () => {
   return axiosInstance().get<Todo>('/todos', {
@@ -18,8 +18,16 @@ export const createTodo = (todo: TodoPostRequest) => {
   });
 };
 
-export const updateTodo = () => {
-  return axiosInstance().put('');
+export const updateTodo = (todoToUpdate: TodoUpdateRequest) => {
+  return axiosInstance().put(
+    `/todos/${todoToUpdate.id}`,
+    { todo: todoToUpdate.todo, isCompleted: todoToUpdate.isCompleted },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      },
+    }
+  );
 };
 
 export const deleteTodo = (todoToDelete: TodoDeleteRequest) => {

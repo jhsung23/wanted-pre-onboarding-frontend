@@ -12,3 +12,9 @@ export type TodoPostRequest = {
 export type TodoDeleteRequest = {
   id: number;
 };
+
+export type TodoUpdateRequest = {
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+};

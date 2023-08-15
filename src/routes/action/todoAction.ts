@@ -9,7 +9,15 @@ export const todoCreateAction: ActionFunction = async ({ request }) => {
 };
 
 export const todoUpdateAction: ActionFunction = async ({ request }) => {
-  return updateTodo();
+  const formData = await request.formData();
+  const idToUpdate = Number(formData.get('id'));
+  const todoToUpdate = formData.get('todo') as string;
+  const isCompletedToUpdate = formData.get('isCompleted') === 'true';
+  return updateTodo({
+    id: idToUpdate,
+    todo: todoToUpdate,
+    isCompleted: isCompletedToUpdate,
+  });
 };
 
 export const todoDeleteAction: ActionFunction = async ({ request }) => {
