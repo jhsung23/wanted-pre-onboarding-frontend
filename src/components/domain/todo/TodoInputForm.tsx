@@ -28,7 +28,7 @@ const TodoInputForm = () => {
         onChange={(e) => setInput(e.target.value)}
         style={{ flexGrow: 1 }}
       />
-      <Button data-testid="new-todo-add-button" size="small">
+      <Button data-testid="new-todo-add-button" size="small" disabled={input === ''}>
         추가
       </Button>
     </fetcher.Form>

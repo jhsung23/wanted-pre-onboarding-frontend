@@ -33,6 +33,7 @@ const EditableTodoItem = ({ initialTodo, updateTodo, quitEditing }: Props) => {
           updateTodo(input);
           quitEditing();
         }}
+        disabled={input === ''}
       >
         제출
       </Button>
