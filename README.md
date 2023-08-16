@@ -22,5 +22,6 @@ npm start
 
 ## 데모 영상
 
-https://github.com/jhsung23/wanted-pre-onboarding-frontend/assets/69228045/cb74734c-c204-417d-9da2-9fbf1494ff85
+https://github.com/jhsung23/wanted-pre-onboarding-frontend/assets/69228045/b8c295b0-7133-468a-85d2-d7ddcb63d85b
+
 
