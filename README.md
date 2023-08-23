@@ -4,7 +4,7 @@
 
 ## Information
 
-- depelover: 성지현
+- developer: 성지현
 - 프로젝트 배포 url: https://wanted-pre-onboarding-frontend-jhsung23.vercel.app
 
 ## 프로젝트 실행 방법
